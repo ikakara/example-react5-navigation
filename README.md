@@ -69,6 +69,7 @@ The code is organized as follows:
 ```
 /src
    /components
+     [./ExampleHeader.js](src/components/ExampleHeader.js)
      ./index.js
      ./TabBarIcon.js
    /constants
