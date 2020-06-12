@@ -66,39 +66,36 @@ However, by not including the "drawer open" in the Welcome screen and making it 
 
 The code is organized as follows:
 
-
-column0
--------
-/src
- | /components
- | [./ExampleHeader.js](src/components/ExampleHeader.js)
- | ./index.js
- | ./TabBarIcon.js
- | /constants
- | ./Colors.js
- | ./index.js
- | ./Layout.js
- | /navigation
- | /dashboard | <-- dashboard drawer gets its own folder
- | ./DashboardNavigator.js | <-- StackNavigator containing a TabNavigator
- | ./FeedStack.js
- | ./index.js
- | ./ProfileStack.js
- | ./SettingsStack.js
- | /welcome | <-- welcome drawer gets its own folder
- | ./index.js
- | ./WelcomeNavigator.js | <-- StackNavigator
- | ./DrawerNavigator.js | <-- add more drawers here
- | ./index.js
- | ./LinkConfiguration.js
- | ./RootNavigation.js | <-- Needed for nested structures
- | /screens
- | /dashboard
- | ./dashboard screen.js files
- | /welcome
- | ./welcome screen.js files
+`/src
+   /components
+     [./ExampleHeader.js](src/components/ExampleHeader.js)
+     ./index.js
+     ./TabBarIcon.js
+   /constants
+     ./Colors.js
+     ./index.js
+     ./Layout.js
+   /navigation
+     /dashboard                     <-- dashboard drawer gets its own folder
+       ./DashboardNavigator.js      <-- StackNavigator containing a TabNavigator
+       ./FeedStack.js
+       ./index.js
+       ./ProfileStack.js
+       ./SettingsStack.js
+     /welcome                       <-- welcome drawer gets its own folder
+       ./index.js
+       ./WelcomeNavigator.js        <-- StackNavigator
+     ./DrawerNavigator.js           <-- add more drawers here
+     ./index.js
+     ./LinkConfiguration.js
+     ./RootNavigation.js            <-- Needed for nested structures
+   /screens
+     /dashboard
+       ./dashboard screen.js files
+     /welcome
+       ./welcome screen.js files
 App.js
-
+`
 
 In a single file, App.js was not much longer than this readme.  The majority of the code is in DashboardNavigator.js (contains 2 functions): the dashboard's StackNavigator and TabNavigator. I kept them together, since one contains the StackNavigators/screens for each tab, and the other contains the modal screens.  If you were to build a screen that required a modal screen, it made sense to keep the "wiring" in one file.
 
