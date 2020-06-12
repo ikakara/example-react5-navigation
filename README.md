@@ -66,9 +66,10 @@ However, by not including the "drawer open" in the Welcome screen and making it 
 
 The code is organized as follows:
 
-**/src
+```
+/src
    /components
-     [./ExampleHeader.js](src/components/ExampleHeader.js)
+     ./ExampleHeader.js
      ./index.js
      ./TabBarIcon.js
    /constants
@@ -94,8 +95,9 @@ The code is organized as follows:
        ./dashboard screen.js files
      /welcome
        ./welcome screen.js files
-App.js**
+App.js
 
+```
 
 In a single file, App.js was not much longer than this readme.  The majority of the code is in DashboardNavigator.js (contains 2 functions): the dashboard's StackNavigator and TabNavigator. I kept them together, since one contains the StackNavigators/screens for each tab, and the other contains the modal screens.  If you were to build a screen that required a modal screen, it made sense to keep the "wiring" in one file.
 
