@@ -4,7 +4,7 @@ I'm ~1 month new into react-native development w/ Expo (and Amplify).  This exam
 
 Learning a new **coding anything** (e.g. language, framework, etc) shouldn't take a month ... a weekend **MAX**! The naive examples that the "official documentation" provides needs to be linked to a graph of (non-trivial, more advanced, NAIVE++) CURRENT EXAMPLES.  All one should need is an overiew, ONE NAIVE++ APPLICABLE (AND CURRENT) EXAMPLE, and some notes on "further learning" to be productive.
 
-Amplify is the worst (documented) by far - their "official documentation" is out of date.  The main issue for learning React5 is wading through the endless examples meant for older versions of React ... I realize I just contributed to the endless... so if you're using React6 or more recent, then your search contininues :(
+Amplify is the worst (documented) by far - their "official documentation" is out of date.  The main issue for learning React5 is wading through the endless examples meant for older versions of React ... I realize I just contributed to the endless... so if you're using React6 or more recent, then your search continues :(
 
 ## ES6
 

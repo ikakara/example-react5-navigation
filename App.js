@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, Dimensions } from "react-native";
+import { View, Button, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 /**
@@ -188,7 +188,7 @@ function DrawerNavigator(props) {
   );
 }
 
-export default function App(props) {
+function App(props) {
   const { navigation, route } = props;
 
   return (
@@ -202,3 +202,5 @@ export default function App(props) {
     </View>
   );
 }
+
+export default App;
