@@ -2,9 +2,9 @@
 
 I'm ~1 month new into react-native development w/ Expo (and Amplify).  This example will be limited to react5-navigation (minor Expo use of vector-icons). I do want to rant on "documentation."
 
-Learning a new **coding anything** (e.g. language, framework, etc) shouldn't take a month ... a weekend **MAX**! The naive examples that the "official documentation" provides needs to be linked to a graph of (non-trivial, more advanced, NAIVE++) CURRENT EXAMPLES.  All one should need is an overiew, ONE NAIVE++ APPLICABLE (AND CURRENT) EXAMPLE, and some notes on "further learning" to be productive.
+Learning a new **coding anything** (e.g. language, framework, etc) shouldn't take a month ... a weekend **MAX**! The naive examples that the "official documentation" provides needs to be linked to a graph of (non-trivial, more advanced, NAIVE++) CURRENT EXAMPLES.  All one should need (to be productive) is an overiew, ONE NAIVE++ APPLICABLE (AND CURRENT) EXAMPLE, and some notes on "further learning".
 
-Amplify is the worst (documented) by far - their "official documentation" is out of date.  The main issue for learning React5 is wading through the endless examples meant for older versions of React ... I realize I just contributed to the endless... so if you're using React6 or more recent, then your search continues :(
+Amplify is the worst (documented) by far - their "official documentation" is out of date.  The main issue for learning React5 is wading through the endless examples meant for older versions of React ... I realize I just contributed to the endless... so if you're not using React5, then your search continues :(
 
 ## ES6
 
@@ -85,7 +85,7 @@ The code is organized as follows:
      /welcome                       <-- welcome drawer gets its own folder
        ./index.js
        ./WelcomeNavigator.js        <-- StackNavigator
-     ./DrawerNaviator.js            <-- add more drawers here
+     ./DrawerNavigator.js           <-- add more drawers here
      ./index.js
      ./LinkConfiguration.js
      ./RootNavigation.js            <-- Needed for nested structures
@@ -111,9 +111,9 @@ The header customization (title), for the tabs wasn't trivial.  The header is fr
 
 ```
 
-All children below the Tab Navigator will need to use RootNavigation.navigate() or RootNavigation.dispatch(actions) (e.g. close drawers).
+All children below the Tab Navigator will need to use RootNavigation.navigate() or RootNavigation.dispatch(action) (e.g. close drawers).
 
-Modal screens need to be in the RootStack (e.g. DashboardStack), so they cover the entire screen when used.  I've tried to comment in the code -- but if you have any questions, feel free to ask.
+Modal screens need to be in the RootStack (e.g. DashboardStack), so they cover the entire screen when used.  The code mostly speaks for itself - it attempts to be NAIVE++, but if you have any questions, feel free to ask.
 
 ## TBDs
 
