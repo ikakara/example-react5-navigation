@@ -10,6 +10,7 @@ function FeedStack(props) {
 
   return (
     <Stack.Navigator
+      {...props} // allow parent properties to be overridden
       mode="modal"
       // initialRouteName="Feed"
       // screenOptions={{ gestureEnabled: false }}

@@ -28,7 +28,43 @@ import { RootNavigation } from "../../navigation";
 import { FeedStack, ProfileStack, SettingsStack } from "../dashboard";
 import { TemplateModal } from "../../screens/dashboard";
 
-import { TabBarIcon } from "../../components";
+import { TabBarIcon, ExampleHeader } from "../../components";
+
+function getRightHeader({ navigation, routeName }) {
+  switch (routeName) {
+    case "Drawer": // default routeName when called from the WelcomeStack
+    case "Feed":
+    case "Detail":
+    case "Profile":
+      return (
+        <View style={{ flexDirection: "row" }}>
+          <Button
+            onPress={() => navigation.navigate("ModalTemplate")}
+            title="Do ModalTemplate"
+            color="#00cc00"
+          />
+        </View>
+      );
+    case "Settings":
+      return (
+        <ExampleHeader
+          focused={false}
+          title="I'm doing my own thing!"
+          name="md-thumbs-up"
+          alert="pressed me"
+        />
+      );
+    default:
+      return (
+        <ExampleHeader
+          focused={false}
+          title={`Missing "case ${routeName}:"`}
+          name="md-thumbs-down"
+          alert={routeName}
+        />
+      );
+  }
+}
 
 const Tab = createBottomTabNavigator();
 
@@ -47,54 +83,46 @@ function DashboardTabNavigator(props) {
   navigation.setOptions({
     headerTitle: routeName,
     /* headerRight can be customized here for each child page */
-    headerRight: () => (
-      <View style={{ flexDirection: "row" }}>
-        <Button
-          onPress={() => navigation.navigate("ModalTemplate")}
-          title="Do ModalTemplate"
-          color="#00cc00"
-        />
-      </View>
-    ),
+    headerRight: () => getRightHeader({ navigation, routeName }),
     headerRightContainerStyle: {
       paddingRight: 16,
     },
   });
   //https://stackoverflow.com/questions/60267273/react-navigation-v5-hide-bottom-tabs
   return (
-    <Tab.Navigator>
+    <Tab.Navigator {...props}>
       <Tab.Screen
         name="Feed"
         component={FeedStack}
+        {...props} // allow parent properties to be overridden
         options={{
           title: "Feed",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-filing" />
           ),
         }}
-        {...props}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileStack}
+        {...props} // allow parent properties to be overridden
         options={{
           title: "Profile",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-contact" />
           ),
         }}
-        {...props}
       />
       <Tab.Screen
         name="Settings"
         component={SettingsStack}
+        {...props} // allow parent properties to be overridden
         options={{
           title: "Settings",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-settings" />
           ),
         }}
-        {...props}
       />
     </Tab.Navigator>
   );
@@ -107,6 +135,7 @@ function DashboardNavigator(props) {
 
   return (
     <RootStack.Navigator
+      {...props} // allow parent properties to be overridden
       mode="modal"
       //      initialRouteName="Dashboard"
       //      screenOptions={{ gestureEnabled: false }}
@@ -114,6 +143,7 @@ function DashboardNavigator(props) {
       <RootStack.Screen
         name="Dashboard"
         component={DashboardTabNavigator}
+        {...props} // allow parent properties to be overridden
         options={({ navigation, route }) => ({
           headerLeft: (props) => (
             <Ionicons
@@ -129,6 +159,7 @@ function DashboardNavigator(props) {
       <RootStack.Screen
         name="ModalTemplate"
         component={TemplateModal}
+        {...props} // allow parent properties to be overridden
         options={{ headerShown: false }}
       />
     </RootStack.Navigator>

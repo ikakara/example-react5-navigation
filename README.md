@@ -117,7 +117,6 @@ Modal screens need to be in the RootStack (e.g. DashboardStack), so they cover t
 
 ## TBDs
 
-* Header customization from a child screen
 * LinkingConfiguration (expo-links) - nice to have for the web version
 
 ## Further Learning

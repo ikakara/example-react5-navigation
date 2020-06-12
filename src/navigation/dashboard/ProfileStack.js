@@ -10,6 +10,7 @@ function ProfileStack(props) {
 
   return (
     <Stack.Navigator
+      {...props} // allow parent properties to be overridden
       mode="modal"
       //  initialRouteName="Profile"
       //  screenOptions={{ gestureEnabled: false }}
