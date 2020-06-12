@@ -68,6 +68,13 @@ The code is organized as follows:
 
 ```
 /src
+   /components
+     ./index.js
+     ./TabBarIcon.js
+   /constants
+     ./Colors.js
+     ./index.js
+     ./Layout.js
    /navigation
      ./index.js
      ./LinkConfiguration.js
