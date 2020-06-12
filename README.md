@@ -103,6 +103,7 @@ Not sure what else I had so much trouble with.  Modal screens need to be in the 
 
 * Other nesting examples:
   * <https://itnext.io/the-intricacies-of-nesting-navigators-in-react-native-using-react-navigation-fef52ca72964>
+  * <https://www.reactnativeschool.com/complex-navigation-example-with-react-navigation>
 * <https://reactnavigation.org/docs/upgrading-from-4.x/>
 * Application State Management (Redux vs Mobx) - learn Redux (boiler plate is a good thing; lots of copy/paste examples out there)
 * React5 cross platform development (iOS, Android, Web) - Expo
