@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Button, Dimensions } from "react-native";
+import { View, Button } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 /**
 - DrawerNavigator
-  - Welcome Screen
-    - Login Button
-    - Sign Up Button
+  - Welcome Stack
+    - Welcome Screen
+      - Login Button
+    - Sign Up Screen
   - Dashboard - StackNavigator (needed for header and to change the header based on the tab)
     - TabNavigator (Dashboard)
       - Tab 1 - Feed - StackNavigator
@@ -32,10 +33,31 @@ import {
   Feed,
   Profile,
   Settings,
+  Signup,
   TemplateModal,
   Welcome,
   styles,
 } from "./src/screens";
+
+import { Layout } from "./src/constants";
+import { TabBarIcon } from "./src/components";
+
+const WelcomeNavigator = createStackNavigator();
+
+function WelcomeStack(props) {
+  const { navigation, route } = props;
+
+  return (
+    <WelcomeNavigator.Navigator
+      mode="modal"
+      initialRouteName="Welcome"
+      // screenOptions={{ gestureEnabled: false }}
+    >
+      <WelcomeNavigator.Screen name="Welcome" component={Welcome} {...props} />
+      <WelcomeNavigator.Screen name="Signup" component={Signup} {...props} />
+    </WelcomeNavigator.Navigator>
+  );
+}
 
 const FeedNavigator = createStackNavigator();
 
@@ -123,9 +145,39 @@ function DashboardTabNavigator(props) {
   //https://stackoverflow.com/questions/60267273/react-navigation-v5-hide-bottom-tabs
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Feed" component={FeedStack} {...props} />
-      <Tab.Screen name="Profile" component={ProfileStack} {...props} />
-      <Tab.Screen name="Settings" component={SettingsStack} {...props} />
+      <Tab.Screen
+        name="Feed"
+        component={FeedStack}
+        options={{
+          title: "Feed",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-filing" />
+          ),
+        }}
+        {...props}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStack}
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-contact" />
+          ),
+        }}
+        {...props}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsStack}
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-settings" />
+          ),
+        }}
+        {...props}
+      />
     </Tab.Navigator>
   );
 }
@@ -170,11 +222,10 @@ const Drawer = createDrawerNavigator();
 //https://stackoverflow.com/questions/49469834/recommended-way-to-have-drawer-resizable
 function DrawerNavigator(props) {
   const { navigation, route } = props;
-  const { width, height } = Dimensions.get("window");
 
   return (
     <Drawer.Navigator
-      //drawerType={width >= 768 ? "permanent" : "front"}
+      //drawerType={Layout.isSmallDevice ? "front" : "permanent"}
       drawerPosition="left"
       initialRouteName="Welcome"
     >
@@ -183,7 +234,7 @@ function DrawerNavigator(props) {
         component={DashboardStackNavigator}
         {...props}
       />
-      <Drawer.Screen name="Welcome" component={Welcome} {...props} />
+      <Drawer.Screen name="Welcome" component={WelcomeStack} {...props} />
     </Drawer.Navigator>
   );
 }

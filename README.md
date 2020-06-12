@@ -22,9 +22,10 @@ React5-Navigation has 3 basic Navigators - you can build custom navigators if yo
 
 ```
 - DrawerNavigator
-  - Welcome Screen
-    - Login Button
-    - Sign Up Button
+  - Welcome Stack
+    - Welcome Screen
+      - Login Button
+    - Sign Up Screen
   - Dashboard - StackNavigator (needed for header and to change the header based on the tab)
     - TabNavigator (Dashboard)
       - Tab 1 - Feed - StackNavigator
@@ -36,7 +37,6 @@ React5-Navigation has 3 basic Navigators - you can build custom navigators if yo
         - Settings Screen
     - Modal Screen
 
-
 ```
 
 The way an application is structured, doesn't have to be the way an application presents it's navigation/screens to the user.  For example, Welcome Screen (login, signup) -> DrawerNavigator makes logical sense.  This would require another StackNavigator (React5 did away with SwitchNavigator) with conditionals.
@@ -45,9 +45,10 @@ The way an application is structured, doesn't have to be the way an application 
 - AnotherStackNavigator
 {!isLoggedIn ? (
 
-  - Welcome Screen
-    - Login Button
-    - Sign Up Button
+  - Welcome Stack
+    - Welcome Screen
+      - Login Button
+    - Sign Up Screen
 ) : (
   - DrawerNavigator
     - Dashboard - StackNavigator (needed for header and to change the header based on the tab)

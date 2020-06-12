@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Button, Text } from "react-native";
 
-import { Feed, styles } from "../screens";
+import { Feed, Signup, styles } from "../screens";
 
 function Welcome(props) {
   const { navigation, route } = props;
@@ -13,7 +13,7 @@ function Welcome(props) {
         title="Login"
         onPress={() => navigation.navigate("Drawer", { screen: { Feed } })}
       />
-      <Button title="Sign Up" onPress={() => alert("button pressed")} />
+      <Button title="Sign Up" onPress={() => navigation.navigate("Signup")} />
     </View>
   );
 }
