@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Button, Text } from "react-native";
 
-import { Feed, styles } from ".";
+import styles from "../styles";
 
 function Signup(props) {
   const { navigation, route } = props;

@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 /**
 - DrawerNavigator
@@ -19,29 +18,25 @@ import { View } from "react-native";
     - Modal Screen
  */
 
-import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import {
-  DrawerNavigator,
-  RootNavigation,
-  LinkingConfiguration,
-} from "./src/navigation";
+import { Signup, Welcome } from "../../screens/welcome";
 
-import { styles } from "./src/screens";
+const WelcomeStack = createStackNavigator();
 
-function App(props) {
+function WelcomeNavigator(props) {
   const { navigation, route } = props;
 
   return (
-    <View style={styles.container}>
-      <NavigationContainer
-        ref={RootNavigation.navigationRef}
-        // TBD linking={LinkingConfiguration}
-      >
-        <DrawerNavigator {...props} />
-      </NavigationContainer>
-    </View>
+    <WelcomeStack.Navigator
+      mode="modal"
+      initialRouteName="Welcome"
+      // screenOptions={{ gestureEnabled: false }}
+    >
+      <WelcomeStack.Screen name="Welcome" component={Welcome} {...props} />
+      <WelcomeStack.Screen name="Signup" component={Signup} {...props} />
+    </WelcomeStack.Navigator>
   );
 }
 
-export default App;
+export default WelcomeNavigator;

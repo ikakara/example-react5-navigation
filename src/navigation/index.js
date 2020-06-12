@@ -1,4 +1,5 @@
+import DrawerNavigator from "./DrawerNavigator.js";
 import LinkingConfiguration from "./LinkingConfiguration.js";
 import * as RootNavigation from "./RootNavigation.js";
 
-export { LinkingConfiguration, RootNavigation };
+export { DrawerNavigator, LinkingConfiguration, RootNavigation };

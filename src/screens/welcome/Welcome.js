@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Button, Text } from "react-native";
 
-import { Feed, Signup, styles } from "../screens";
+import { Feed } from "../dashboard";
+import styles from "../styles";
 
 function Welcome(props) {
   const { navigation, route } = props;

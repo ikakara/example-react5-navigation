@@ -76,18 +76,31 @@ The code is organized as follows:
      ./index.js
      ./Layout.js
    /navigation
+     /dashboard                     <-- dashboard drawer gets its own folder
+       ./DashboardNavigator.js      <-- StackNavigator containing a TabNavigator
+       ./FeedStack.js
+       ./index.js
+       ./ProfileStack.js
+       ./SettingsStack.js
+     /welcome                       <-- welcome drawer gets its own folder
+       ./index.js
+       ./WelcomeNavigator.js        <-- StackNavigator
+     ./DrawerNaviator.js            <-- add more drawers here
      ./index.js
      ./LinkConfiguration.js
-     ./RootNavigation.js
+     ./RootNavigation.js            <-- Needed for nested structures
    /screens
-     ./the screen.js files are here
-App.js - code to review is here
+     /dashboard
+       ./dashboard screen.js files
+     /welcome
+       ./welcome screen.js files
+App.js
 
 ```
 
-App.js looks rather trivial...
+In a single file, App.js was not much longer than this readme.  The majority of the code is in DashboardNavigator.js (contains 2 functions): the dashboard's StackNavigator and TabNavigator. I kept them together, since one contains the StackNavigators/screens for each tab, and the other contains the modal screens.  If you were to build a screen that required a modal screen, it made sense to keep the "wiring" in one file.
 
-The header customization (title), for the tabs wasn't trivial.  The header is from the DashboardStack (Tab Navigators don't have headers).
+The header customization (title), for the tabs wasn't trivial.  The header is from the Dashboard's StackNavigator (Tab Navigators don't have headers).
 
 ```
   // used to get the name of the tab
@@ -100,7 +113,7 @@ The header customization (title), for the tabs wasn't trivial.  The header is fr
 
 All children below the Tab Navigator will need to use RootNavigation.navigate() or RootNavigation.dispatch(actions) (e.g. close drawers).
 
-Not sure what else I had so much trouble with.  Modal screens need to be in the RootStack, so they cover the entire screen when used.  I've tried to comment in the code -- but if you have any questions, feel free to ask.
+Modal screens need to be in the RootStack (e.g. DashboardStack), so they cover the entire screen when used.  I've tried to comment in the code -- but if you have any questions, feel free to ask.
 
 ## TBDs
 

@@ -1,16 +1,16 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-import styles from "./styles";
+import styles from "../styles";
 
-function Settings(props) {
+function Profile(props) {
   const { navigation, route } = props;
 
   return (
     <View style={styles.screen}>
-      <Text style={styles.title}>Settings</Text>
+      <Text style={styles.title}>Profile</Text>
     </View>
   );
 }
 
-export default Settings;
+export default Profile;
