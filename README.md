@@ -122,7 +122,7 @@ Here's how the headerTitle and headerRight are configured:
   });
 ```
 
-The headerRight was much more complicated:
+The headerLeft was much more complicated:
 
 ```javascript
   // One way to understand the navigation state, is to get the navigation stack
