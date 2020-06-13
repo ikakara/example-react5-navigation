@@ -41,7 +41,7 @@ function getRightHeader({ navigation, routeName }) {
         <View style={{ flexDirection: "row" }}>
           <Button
             onPress={() => navigation.navigate("ModalTemplate")}
-            title="Do ModalTemplate"
+            title="Do Modal"
             color="#00cc00"
           />
         </View>
@@ -50,7 +50,7 @@ function getRightHeader({ navigation, routeName }) {
       return (
         <ExampleHeader
           focused={false}
-          title="I'm doing my own thing!"
+          title="Customize Me!"
           name="md-thumbs-up"
           alert="pressed me"
         />

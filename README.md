@@ -124,6 +124,44 @@ navigation.setOptions({
 });
 ```
 
+```javascript
+function getRightHeader({ navigation, routeName }) {
+  switch (routeName) {
+    case "Drawer": // default routeName when called from the WelcomeStack
+    case "Feed":
+    case "Detail":
+    case "Profile":
+      return (
+        <View style={{ flexDirection: "row" }}>
+          <Button
+            onPress={() => navigation.navigate("ModalTemplate")}
+            title="Do Modal"
+            color="#00cc00"
+          />
+        </View>
+      );
+    case "Settings":
+      return (
+        <ExampleHeader
+          focused={false}
+          title="I'm doing my own thing!"
+          name="md-thumbs-up"
+          alert="pressed me"
+        />
+      );
+    default:
+      return (
+        <ExampleHeader
+          focused={false}
+          title={`Missing "case ${routeName}:"`}
+          name="md-thumbs-down"
+          alert={routeName}
+        />
+      );
+  }
+}
+```
+
 The headerLeft was much more complicated:
 
 ```javascript

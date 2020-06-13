@@ -6,7 +6,7 @@ import styles from "../styles";
 function TemplateModal({ navigation }) {
   return (
     <View style={styles.screen}>
-      <Text style={styles.title}>This is a template modal!</Text>
+      <Text style={styles.title}>Modal Template!</Text>
       <Button onPress={() => navigation.goBack()} title="Dismiss" />
     </View>
   );
