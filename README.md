@@ -75,6 +75,9 @@ The code is organized as follows:
     - [./Colors.js](/src/constants/Colors.js)
     - ./index.js
     - [./Layout.js](/src/constants/Layout.js)
+  - /helpers
+    - ./index.js
+    - [./NavigationUtils.js](/src/helpers/NavigationUtils.js)
   - /navigation
     - /dashboard **<-- dashboard drawer gets its own folder**
       - [./DashboardNavigator.js](/src/navigation/dashboard/DashboardNavigator.js) **<-- StackNavigator containing a TabNavigator**
@@ -96,21 +99,78 @@ The code is organized as follows:
         - ./welcome screen.js files
 - [App.js](App.js)
 
-In a single file, App.js was not much longer than this readme. The majority of the code is in DashboardNavigator.js (contains 2 functions): the dashboard's StackNavigator and TabNavigator. I kept them together, since one contains the StackNavigators/screens for each tab, and the other contains the modal screens. If you were to build a screen that required a modal screen, it made sense to keep the "wiring" in one file.
+Most of the app is trivial.  The main complexity is configuring the header (headerLeft, headerTitle and headerRight) for the various screens.  Only the StackNavigator has a header, per se. So to show "headers" in the TabNavigator and DrawerNavigator screens, you'll use a StackNavigator's header.  Having multiple StackNavigators, makes state tricky.  There are two useful modules:
 
-The header customization (title), for the tabs wasn't trivial. The header is from the Dashboard's StackNavigator (Tab Navigators don't have headers).
+[./RootNavigation.js](/src/navigation/RootNavigation.js) creates a ref at the NavigationContainer (beginning of the navigation tree), and allows you to navigate outside the scope of your current navigation.
+
+[./NavigationUtils.js](/src/helpers/NavigationUtils.js).getStack() allows you to view the current navigation stack (drawer -> dashboard-stack -> etc).  You can pop and push the correct elements on the stack to navigate to the desired screen.  I don't do that - but very handy for debugging and understanding "navigation state."
+
+The majority of the code is in [./DashboardNavigator.js](/src/navigation/dashboard/DashboardNavigator.js) (contains 2 functions): the dashboard's StackNavigator and TabNavigator. I kept them together, since one contains the StackNavigators/screens for each tab, and the other contains the modal screens. If you were to build a screen that required a modal screen, it made sense to keep the "wiring" in one file.  Modal screens need to be in the RootStack (e.g. DashboardStack), so they cover the entire screen when used.
+
+Here's how the headerTitle and headerRight are configured:
 
 ```javascript
-// used to get the name of the tab
-const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
-
-// used to get the current screen (of the stack) for each tab
-const routeName = RootNavigation.getCurrentRoute()?.name ?? tabName;
+  //const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
+  let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
+  routeName = routeName != "Drawer" ? routeName : "Feed";
+  navigation.setOptions({
+    headerTitle: routeName,
+    headerRight: () => getRightHeader({ navigation, routeName }),
+    headerRightContainerStyle: {
+      paddingRight: 16,
+    },
+  });
 ```
 
-All children below the Tab Navigator will need to use RootNavigation.navigate() or RootNavigation.dispatch(action) (e.g. close drawers).
+The headerRight was much more complicated:
 
-Modal screens need to be in the RootStack (e.g. DashboardStack), so they cover the entire screen when used. The code mostly speaks for itself - it attempts to be NAIVE++, but if you have any questions, feel free to ask.
+```javascript
+  // One way to understand the navigation state, is to get the navigation stack
+  // we want to determine whether we need to put a back arrow - when the current
+  // previous items on the navigation stack are type=="stack"
+  const stack = NavigationUtils.getStack({ navigation });
+  console.info(JSON.stringify(stack));
+
+  const current = stack?.pop();
+  const previous = stack?.pop();
+
+  if (current?.type == "stack" && previous?.type == "stack") {
+    // we need to reconfigure the headerLeft w/ a back arrow
+    navigation.setOptions({
+      headerLeft: (props) => (
+        <View style={{ flexDirection: "row" }}>
+          <Ionicons
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+          />
+          <Ionicons
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.pop()}
+            name="md-arrow-dropleft"
+            size={30}
+          />
+        </View>
+      ),
+    });
+  } else {
+    navigation.setOptions({
+      headerLeft: (props) => (
+        <Ionicons
+          style={{ paddingLeft: 10 }}
+          onPress={() => navigation.openDrawer()}
+          name="md-menu"
+          size={30}
+        />
+      ),
+    });
+  }
+```
+
+I found navigation to be mostly "trial and error."  Try with the current navigation prop first, and if that doesn't work, use RootNavigation.navigate(), RootNavigation.dispatch(action) (e.g. close drawers), etc.  If that doesn't work use [./NavigationUtils.js](/src/helpers/NavigationUtils.js).getStack() to view the "navigation state" and go from there.
+
+ The code mostly speaks for itself - it attempts to be NAIVE++, but if you have any questions, feel free to ask.
 
 ## TBDs
 

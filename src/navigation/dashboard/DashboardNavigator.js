@@ -29,6 +29,7 @@ import { FeedStack, ProfileStack, SettingsStack } from "../dashboard";
 import { TemplateModal } from "../../screens/dashboard";
 
 import { TabBarIcon, ExampleHeader } from "../../components";
+import { NavigationUtils } from "../../helpers";
 
 function getRightHeader({ navigation, routeName }) {
   switch (routeName) {
@@ -68,26 +69,81 @@ function getRightHeader({ navigation, routeName }) {
 
 const Tab = createBottomTabNavigator();
 
+//
+// For nested-navigation simplicity, configure the header for every child
+// screen in the TabNavigator
+//
+// The default header is configured in DashboardNavigator
+//
+// Header: |  headerLeft headerTitle                          headerRight  |
+//
 function DashboardTabNavigator(props) {
   const { navigation, route } = props;
 
-  // used to get the name of the tab
-  const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
+  //////////////////////////////////////////////////////////////////////////////////
+  // Configure headerLeft
+  //////////////////////////////////////////////////////////////////////////////////
 
-  // used to get the current screen (of the stack) for each tab
-  const routeName = RootNavigation.getCurrentRoute()?.name ?? tabName;
+  // One way to understand the navigation state, is to get the navigation stack
+  // we want to determine whether we need to put a back arrow - when the current
+  // previous items on the navigation stack are type=="stack"
+  const stack = NavigationUtils.getStack({ navigation });
+  console.info(JSON.stringify(stack));
+
+  const current = stack?.pop();
+  const previous = stack?.pop();
+
+  if (current?.type == "stack" && previous?.type == "stack") {
+    // we need to reconfigure the headerLeft w/ a back arrow
+    navigation.setOptions({
+      headerLeft: (props) => (
+        <View style={{ flexDirection: "row" }}>
+          <Ionicons
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+          />
+          <Ionicons
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.pop()}
+            name="md-arrow-dropleft"
+            size={30}
+          />
+        </View>
+      ),
+    });
+  } else {
+    navigation.setOptions({
+      headerLeft: (props) => (
+        <Ionicons
+          style={{ paddingLeft: 10 }}
+          onPress={() => navigation.openDrawer()}
+          name="md-menu"
+          size={30}
+        />
+      ),
+    });
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////
+  // Configure headerTile and headerRight
+  //////////////////////////////////////////////////////////////////////////////////
 
   // Set the header title on the parent stack navigator depending on the
   // currently active tab. Learn more in the documentation:
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
+  //const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
+  let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
+  routeName = routeName != "Drawer" ? routeName : "Feed";
   navigation.setOptions({
     headerTitle: routeName,
-    /* headerRight can be customized here for each child page */
     headerRight: () => getRightHeader({ navigation, routeName }),
     headerRightContainerStyle: {
       paddingRight: 16,
     },
   });
+
   //https://stackoverflow.com/questions/60267273/react-navigation-v5-hide-bottom-tabs
   return (
     <Tab.Navigator {...props}>
@@ -145,6 +201,7 @@ function DashboardNavigator(props) {
         component={DashboardTabNavigator}
         {...props} // allow parent properties to be overridden
         options={({ navigation, route }) => ({
+          // Default headerLeft
           headerLeft: (props) => (
             <Ionicons
               style={{ paddingLeft: 10 }}
