@@ -1,6 +1,6 @@
 # Example of (Expo) React5 (Native) Navigation (Drawer, Stack, Tab)
 
-Try code on Snack: <https://snack.expo.io/@git/github.com/ikakara/example-react5-navigation>
+Try code on Snack: <https://snack.expo.io/@ikakara/94ec98>
 
 I'm ~1 month new into react-native development w/ Expo (and Amplify). This example will be limited to react5-navigation (minor Expo use of vector-icons). I do want to rant on "documentation."
 
