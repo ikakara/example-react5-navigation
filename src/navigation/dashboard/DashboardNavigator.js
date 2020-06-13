@@ -75,7 +75,13 @@ const Tab = createBottomTabNavigator();
 //
 // The default header is configured in DashboardNavigator
 //
+//         |---------------------------------------------------------------|
+//         |                                                               |
 // Header: |  headerLeft headerTitle                          headerRight  |
+//         |                                                               |
+//         |---------------------------------------------------------------|
+//
+//  iOS centers the headerTitle, while Adnroid and Web displays as seen above
 //
 function DashboardTabNavigator(props) {
   const { navigation, route } = props;
