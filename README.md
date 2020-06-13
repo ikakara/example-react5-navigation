@@ -144,7 +144,7 @@ function getRightHeader({ navigation, routeName }) {
       return (
         <ExampleHeader
           focused={false}
-          title="I'm doing my own thing!"
+          title="Customize Me!"
           name="md-thumbs-up"
           alert="pressed me"
         />
