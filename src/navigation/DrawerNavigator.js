@@ -57,7 +57,8 @@ function DrawerNavigator(props) {
             title: "Welcome",
           }}
         />
-        {Platform.OS === "web" && (
+        {/* this doesn't work on snack (web), but it runs fine locally */}
+        {false && Platform.OS === "web" && (
           <Drawer.Screen
             name={Routes.DRAWERNOTFOUND}
             component={NotFound}
