@@ -57,16 +57,16 @@ function DrawerNavigator(props) {
           title: "Welcome",
         }}
       />
-      {Platform.OS === "web" && (
-        <Drawer.Screen
-          name={Routes.DRAWERNOTFOUND}
-          component={NotFound}
-          options={{
-            // Hide the drawer
-            drawerLabel: () => null,
-          }}
-        />
-      )}
+      {/* {Platform.OS === "web" && ( */}
+      <Drawer.Screen
+        name={Routes.DRAWERNOTFOUND}
+        component={NotFound}
+        options={{
+          // Hide the drawer
+          drawerLabel: () => null,
+        }}
+      />
+      {/* )} */}
     </Drawer.Navigator>
   );
 }
