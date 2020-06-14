@@ -1,6 +1,6 @@
 # Example of (Expo) React5 (Native) Navigation (Drawer, Stack, Tab)
 
-Try code on Snack: <https://snack.expo.io/@ikakara/94ec98>
+Try code on Snack: <https://snack.expo.io/@ikakara/github.com-ikakara-example-react5-navigation>
 
 I'm ~1 month new into react-native development w/ Expo (and Amplify). This example will be limited to react5-navigation (minor Expo use of vector-icons). I do want to rant on "documentation."
 
@@ -220,6 +220,27 @@ if (current?.type == "stack" && previous?.type == "stack") {
       />
     ),
   });
+}
+```
+
+## NotFound NotWorking on snack.expo.io
+
+NotFound page is a fundamental screen for web.  For some reason, snack doesn't like it (as coded), so I've disabled it
+
+It does work locally (for me) = so use at your descretion.
+
+```javascript
+{
+  false && Platform.OS === "web" && (
+    <Drawer.Screen
+      name={Routes.DRAWERNOTFOUND}
+      component={NotFound}
+      options={{
+        // Hide the drawer
+        drawerLabel: () => null,
+      }}
+    />
+  );
 }
 ```
 
