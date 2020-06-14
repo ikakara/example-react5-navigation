@@ -33,42 +33,45 @@ const Drawer = createDrawerNavigator();
 //https://stackoverflow.com/questions/49469834/recommended-way-to-have-drawer-resizable
 function DrawerNavigator(props) {
   const { navigation, route } = props;
-
-  return (
-    <Drawer.Navigator
-      {...props} // allow parent properties to be overridden
-      //drawerType={Layout.isSmallDevice ? "front" : "permanent"}
-      drawerPosition="left"
-      initialRouteName={Routes.WELCOME}
-    >
-      <Drawer.Screen
-        name={Routes.DRAWERDASHBOARD}
-        component={DashboardNavigator}
-        {...props}
-        options={{
-          title: "Dashboard",
-        }}
-      />
-      <Drawer.Screen
-        name={Routes.DRAWERWELCOME}
-        component={WelcomeNavigator}
-        {...props}
-        options={{
-          title: "Welcome",
-        }}
-      />
-      {/* {Platform.OS === "web" && ( */}
-      <Drawer.Screen
-        name={Routes.DRAWERNOTFOUND}
-        component={NotFound}
-        options={{
-          // Hide the drawer
-          drawerLabel: () => null,
-        }}
-      />
-      {/* )} */}
-    </Drawer.Navigator>
-  );
+  try {
+    return (
+      <Drawer.Navigator
+        {...props} // allow parent properties to be overridden
+        //drawerType={Layout.isSmallDevice ? "front" : "permanent"}
+        drawerPosition="left"
+        initialRouteName={Routes.WELCOME}
+      >
+        <Drawer.Screen
+          name={Routes.DRAWERDASHBOARD}
+          component={DashboardNavigator}
+          {...props}
+          options={{
+            title: "Dashboard",
+          }}
+        />
+        <Drawer.Screen
+          name={Routes.DRAWERWELCOME}
+          component={WelcomeNavigator}
+          {...props}
+          options={{
+            title: "Welcome",
+          }}
+        />
+        {Platform.OS === "web" && (
+          <Drawer.Screen
+            name={Routes.DRAWERNOTFOUND}
+            component={NotFound}
+            options={{
+              // Hide the drawer
+              drawerLabel: () => null,
+            }}
+          />
+        )}
+      </Drawer.Navigator>
+    );
+  } catch (err) {
+    console.error("err:", err);
+  }
 }
 
 export default DrawerNavigator;
