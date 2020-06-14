@@ -1,4 +1,5 @@
 import React from "react";
+import { Platform } from "react-native";
 
 /**
 - DrawerNavigator
@@ -56,14 +57,16 @@ function DrawerNavigator(props) {
           title: "Welcome",
         }}
       />
-      <Drawer.Screen
-        name={Routes.DRAWERNOTFOUND}
-        component={NotFound}
-        options={{
-          // Hide the drawer
-          drawerLabel: () => null,
-        }}
-      />
+      {Platform.OS === "web" && (
+        <Drawer.Screen
+          name={Routes.DRAWERNOTFOUND}
+          component={NotFound}
+          options={{
+            // Hide the drawer
+            drawerLabel: () => null,
+          }}
+        />
+      )}
     </Drawer.Navigator>
   );
 }

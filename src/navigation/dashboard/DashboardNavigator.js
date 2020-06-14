@@ -32,9 +32,32 @@ import { TabBarIcon, ExampleHeader } from "../../components";
 import { FeedStack, ProfileStack, SettingsStack } from "../dashboard";
 import { TemplateModal } from "../../screens/dashboard";
 
+// We could use a giant switch, but I guess I wanted to show off ES6
+function getTitle({ routeName }) {
+  if (
+    routeName == undefined ||
+    [Routes.DRAWERDASHBOARD, Routes.DASHBOARD, Routes.TABFEED].includes(
+      routeName
+    )
+  ) {
+    return Routes.FEED;
+  }
+
+  if (routeName == Routes.TABPROFILE) {
+    return Routes.PROFILE;
+  }
+  if (routeName == Routes.TABSETTINGS) {
+    return Routes.SETTINGS;
+  }
+
+  return routeName;
+}
+
 function getRightHeader({ navigation, routeName }) {
   switch (routeName) {
-    case Routes.DRAWERDASHBOARD: // default routeName when called from the WelcomeStack
+    case undefined: // can get this from the Router
+    case Routes.DRAWERDASHBOARD:
+    case Routes.DASHBOARD:
     case Routes.TABFEED:
     case Routes.TABPROFILE:
     case Routes.TABSETTINGS:
@@ -60,6 +83,7 @@ function getRightHeader({ navigation, routeName }) {
         />
       );
     default:
+      // case misdefined (e.g. spelling issue)
       return (
         <ExampleHeader
           focused={false}
@@ -145,9 +169,8 @@ function DashboardTabNavigator(props) {
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
   //const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
   let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
-  routeName = routeName != Routes.DRAWERDASHBOARD ? routeName : Routes.FEED;
   navigation.setOptions({
-    headerTitle: routeName,
+    headerTitle: getTitle({ routeName }),
     headerRight: () => getRightHeader({ navigation, routeName }),
     headerRightContainerStyle: {
       paddingRight: 16,

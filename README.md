@@ -65,6 +65,19 @@ The way an application is structured, doesn't have to be the way an application 
 
 However, by not including the "drawer open" in the Welcome screen and making it an element of drawer, the UX/UI will appear logical, while reducing nested-navigation headhaches. FYI, the conditional (to show login/signup) will be done inside the Welcome screen.
 
+A NotFound screen (for web), is also placed in the drawer (same reason as WelcomeStack). Obviouly, we don't want to display NotFound in the Drawer. so in [./DrawerNavigator.js](/src/navigation/DrawerNavigator.js), we hide the drawer screen with:
+
+```javascript
+<Drawer.Screen
+  name={Routes.DRAWERNOTFOUND}
+  component={NotFound}
+  options={{
+    // Hide the drawer
+    drawerLabel: () => null,
+  }}
+/>
+```
+
 ## NAIVE++
 
 The code is organized as follows:
@@ -117,9 +130,8 @@ Here's how the headerTitle and headerRight are configured:
 ```javascript
 //const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
 let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
-routeName = routeName != Routes.DASHBOARD ? routeName : Routes.FEED;
 navigation.setOptions({
-  headerTitle: routeName,
+  headerTitle: getTitle({ routeName }),
   headerRight: () => getRightHeader({ navigation, routeName }),
   headerRightContainerStyle: {
     paddingRight: 16,
