@@ -38,7 +38,7 @@ React5-Navigation has 3 basic Navigators - you can build custom navigators if yo
       - Tab 3 - Settings - StackNavigator
         - Settings Screen
     - Modal Screen
-
+  - NotFound Screen (hidden)
 ```
 
 The way an application is structured, doesn't have to be the way an application presents it's navigation/screens to the user. For example, Welcome Screen (login, signup) -> DrawerNavigator makes logical sense. This would require another StackNavigator (React5 did away with SwitchNavigator) with conditionals.
@@ -60,6 +60,7 @@ The way an application is structured, doesn't have to be the way an application 
         - Tab 3 - Settings - StackNavigator
       - Modal Screen
 )}
+  - NotFound Screen
 ```
 
 However, by not including the "drawer open" in the Welcome screen and making it an element of drawer, the UX/UI will appear logical, while reducing nested-navigation headhaches. FYI, the conditional (to show login/signup) will be done inside the Welcome screen.
@@ -93,13 +94,14 @@ The code is organized as follows:
       - [./WelcomeNavigator.js](/src/navigation/welcome/WelcomeNavigator.js) **<-- StackNavigator**
     - [./DrawerNavigator.js](/src/navigation/DrawerNavigator.js) **<-- add more drawers here**
     - ./index.js
-    - [./LinkingConfiguration.js](/src/navigation/LinkingConfiguration.js)
-    - [./RootNavigation.js](/src/navigation/RootNavigation.js) **<-- Needed for nested structures**
+    - [./LinkingConfiguration.js](/src/navigation/LinkingConfiguration.js) **<-- nice to have for the web version**
+    - [./RootNavigation.js](/src/navigation/RootNavigation.js) **<-- Navigation helper methods**
     - /screens
       - /dashboard
         - ./dashboard screen.js files
       - /welcome
         - ./welcome screen.js files
+      - [./NotFound.js](/src/screens/NotFound.js)
 - [App.js](App.js)
 
 Most of the app is trivial. The main complexity is configuring the header (headerLeft, headerTitle and headerRight) for the various screens. Only the StackNavigator has a header, per se. So to show "headers" in the TabNavigator and DrawerNavigator screens, you'll use a StackNavigator's header. Having multiple StackNavigators, makes state tricky. There are two useful modules:
@@ -114,15 +116,15 @@ Here's how the headerTitle and headerRight are configured:
 
 ```javascript
 //const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
-  let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
-  routeName = routeName != Routes.DASHBOARD ? routeName : Routes.FEED;
-  navigation.setOptions({
-    headerTitle: routeName,
-    headerRight: () => getRightHeader({ navigation, routeName }),
-    headerRightContainerStyle: {
-      paddingRight: 16,
-    },
-  });
+let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
+routeName = routeName != Routes.DASHBOARD ? routeName : Routes.FEED;
+navigation.setOptions({
+  headerTitle: routeName,
+  headerRight: () => getRightHeader({ navigation, routeName }),
+  headerRightContainerStyle: {
+    paddingRight: 16,
+  },
+});
 ```
 
 ```javascript
@@ -216,7 +218,6 @@ The code mostly speaks for itself - it attempts to be NAIVE++, but if you have a
 ## TBDs
 
 - I18N/L10N - If you can get iOS, Android and Web for free, why not translations?
-- LinkingConfiguration (expo-links) - nice to have for the web version
 
 ## Further Learning
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 /**
 - DrawerNavigator
@@ -17,6 +17,7 @@ import { View } from "react-native";
       - Tab 3 - Settings - StackNavigator
         - Settings Screen
     - Modal Screen
+  - NotFound Screen (hidden)
  */
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -34,9 +35,10 @@ function App(props) {
 
   return (
     <View style={styles.container}>
-      <NavigationContainer
+      <NavigationContainer // https://reactnavigation.org/docs/navigation-container/
         ref={RootNavigation.navigationRef}
-        // TBD linking={LinkingConfiguration}
+        linking={LinkingConfiguration}
+        fallback={<Text>Loading...</Text>}
       >
         <DrawerNavigator {...props} />
       </NavigationContainer>

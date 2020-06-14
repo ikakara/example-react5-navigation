@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 /**
 - DrawerNavigator
-  - Welcome RootStack
+  - Welcome Stack
     - Welcome Screen
       - Login Button
     - Sign Up Screen
@@ -18,6 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
       - Tab 3 - Settings - StackNavigator
         - Settings Screen
     - Modal Screen
+  - NotFound Screen (hidden)
  */
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -33,7 +34,10 @@ import { TemplateModal } from "../../screens/dashboard";
 
 function getRightHeader({ navigation, routeName }) {
   switch (routeName) {
-    case Routes.DASHBOARD: // default routeName when called from the WelcomeStack
+    case Routes.DRAWERDASHBOARD: // default routeName when called from the WelcomeStack
+    case Routes.TABFEED:
+    case Routes.TABPROFILE:
+    case Routes.TABSETTINGS:
     case Routes.FEED:
     case Routes.DETAIL:
     case Routes.PROFILE:
@@ -141,7 +145,7 @@ function DashboardTabNavigator(props) {
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
   //const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
   let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
-  routeName = routeName != Routes.DASHBOARD ? routeName : Routes.FEED;
+  routeName = routeName != Routes.DRAWERDASHBOARD ? routeName : Routes.FEED;
   navigation.setOptions({
     headerTitle: routeName,
     headerRight: () => getRightHeader({ navigation, routeName }),
@@ -154,7 +158,7 @@ function DashboardTabNavigator(props) {
   return (
     <Tab.Navigator {...props}>
       <Tab.Screen
-        name={Routes.FEED}
+        name={Routes.TABFEED}
         component={FeedStack}
         {...props} // allow parent properties to be overridden
         options={{
@@ -165,7 +169,7 @@ function DashboardTabNavigator(props) {
         }}
       />
       <Tab.Screen
-        name={Routes.PROFILE}
+        name={Routes.TABPROFILE}
         component={ProfileStack}
         {...props} // allow parent properties to be overridden
         options={{
@@ -176,7 +180,7 @@ function DashboardTabNavigator(props) {
         }}
       />
       <Tab.Screen
-        name={Routes.SETTINGS}
+        name={Routes.TABSETTINGS}
         component={SettingsStack}
         {...props} // allow parent properties to be overridden
         options={{

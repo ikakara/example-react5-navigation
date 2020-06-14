@@ -15,7 +15,7 @@ function Signup(props) {
         onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{ name: Routes.DASHBOARD }],
+            routes: [{ name: Routes.DRAWERDASHBOARD }],
           })
         }
       />

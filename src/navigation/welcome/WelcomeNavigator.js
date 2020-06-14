@@ -16,6 +16,7 @@ import React from "react";
       - Tab 3 - Settings - StackNavigator
         - Settings Screen
     - Modal Screen
+  - NotFound Screen (hidden)
  */
 
 import { createStackNavigator } from "@react-navigation/stack";

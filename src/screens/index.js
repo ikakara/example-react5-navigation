@@ -1,3 +1,4 @@
+import NotFound from "./NotFound.js";
 import styles from "./styles.js";
 
-export { styles };
+export { NotFound, styles };

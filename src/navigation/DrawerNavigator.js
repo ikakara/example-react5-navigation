@@ -16,12 +16,14 @@ import React from "react";
       - Tab 3 - Settings - StackNavigator
         - Settings Screen
     - Modal Screen
+  - NotFound Screen (hidden)
  */
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { DashboardNavigator } from "./dashboard";
 import { WelcomeNavigator } from "./welcome";
+import { NotFound } from "../screens";
 
 import { Layout, Routes } from "../constants";
 
@@ -39,14 +41,28 @@ function DrawerNavigator(props) {
       initialRouteName={Routes.WELCOME}
     >
       <Drawer.Screen
-        name={Routes.DASHBOARD}
+        name={Routes.DRAWERDASHBOARD}
         component={DashboardNavigator}
         {...props}
+        options={{
+          title: "Dashboard",
+        }}
       />
       <Drawer.Screen
-        name={Routes.WELCOME}
+        name={Routes.DRAWERWELCOME}
         component={WelcomeNavigator}
         {...props}
+        options={{
+          title: "Welcome",
+        }}
+      />
+      <Drawer.Screen
+        name={Routes.DRAWERNOTFOUND}
+        component={NotFound}
+        options={{
+          // Hide the drawer
+          drawerLabel: () => null,
+        }}
       />
     </Drawer.Navigator>
   );
