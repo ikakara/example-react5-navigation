@@ -23,7 +23,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DashboardNavigator } from "./dashboard";
 import { WelcomeNavigator } from "./welcome";
 
-import { Layout } from "../constants";
+import { Layout, Routes } from "../constants";
 
 const Drawer = createDrawerNavigator();
 
@@ -36,10 +36,18 @@ function DrawerNavigator(props) {
       {...props} // allow parent properties to be overridden
       //drawerType={Layout.isSmallDevice ? "front" : "permanent"}
       drawerPosition="left"
-      initialRouteName="Welcome"
+      initialRouteName={Routes.WELCOME}
     >
-      <Drawer.Screen name="Drawer" component={DashboardNavigator} {...props} />
-      <Drawer.Screen name="Welcome" component={WelcomeNavigator} {...props} />
+      <Drawer.Screen
+        name={Routes.DASHBOARD}
+        component={DashboardNavigator}
+        {...props}
+      />
+      <Drawer.Screen
+        name={Routes.WELCOME}
+        component={WelcomeNavigator}
+        {...props}
+      />
     </Drawer.Navigator>
   );
 }

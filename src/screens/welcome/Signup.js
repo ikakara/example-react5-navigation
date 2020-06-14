@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Button, Text } from "react-native";
 
+import { Labels } from "../../constants";
 import styles from "../styles";
 
 function Signup(props) {
@@ -14,7 +15,7 @@ function Signup(props) {
         onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{ name: "Drawer" }],
+            routes: [{ name: Routes.FEED }],
           })
         }
       />

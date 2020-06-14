@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { Routes } from "../../constants";
 import { Settings } from "../../screens/dashboard";
 
 const Stack = createStackNavigator();
@@ -15,7 +16,7 @@ function SettingsStack(props) {
       //  initialRouteName="Settings"
       //  screenOptions={{ gestureEnabled: false }}
     >
-      <Stack.Screen name="Settings" component={Settings} {...props} />
+      <Stack.Screen name={Routes.SETTINGS} component={Settings} {...props} />
     </Stack.Navigator>
   );
 }

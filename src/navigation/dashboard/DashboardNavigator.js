@@ -23,30 +23,30 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { Routes } from "../../constants";
 import { RootNavigation } from "../../navigation";
+import { NavigationUtils } from "../../helpers";
+import { TabBarIcon, ExampleHeader } from "../../components";
 
 import { FeedStack, ProfileStack, SettingsStack } from "../dashboard";
 import { TemplateModal } from "../../screens/dashboard";
 
-import { TabBarIcon, ExampleHeader } from "../../components";
-import { NavigationUtils } from "../../helpers";
-
 function getRightHeader({ navigation, routeName }) {
   switch (routeName) {
-    case "Drawer": // default routeName when called from the WelcomeStack
-    case "Feed":
-    case "Detail":
-    case "Profile":
+    case Routes.DASHBOARD: // default routeName when called from the WelcomeStack
+    case Routes.FEED:
+    case Routes.DETAIL:
+    case Routes.PROFILE:
       return (
         <View style={{ flexDirection: "row" }}>
           <Button
-            onPress={() => navigation.navigate("ModalTemplate")}
+            onPress={() => navigation.navigate(Routes.MODALTEMPLATE)}
             title="Do Modal"
             color="#00cc00"
           />
         </View>
       );
-    case "Settings":
+    case Routes.SETTINGS:
       return (
         <ExampleHeader
           focused={false}
@@ -141,7 +141,7 @@ function DashboardTabNavigator(props) {
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
   //const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
   let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
-  routeName = routeName != "Drawer" ? routeName : "Feed";
+  routeName = routeName != Routes.DASHBOARD ? routeName : Routes.FEED;
   navigation.setOptions({
     headerTitle: routeName,
     headerRight: () => getRightHeader({ navigation, routeName }),
@@ -154,7 +154,7 @@ function DashboardTabNavigator(props) {
   return (
     <Tab.Navigator {...props}>
       <Tab.Screen
-        name="Feed"
+        name={Routes.FEED}
         component={FeedStack}
         {...props} // allow parent properties to be overridden
         options={{
@@ -165,7 +165,7 @@ function DashboardTabNavigator(props) {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name={Routes.PROFILE}
         component={ProfileStack}
         {...props} // allow parent properties to be overridden
         options={{
@@ -176,7 +176,7 @@ function DashboardTabNavigator(props) {
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name={Routes.SETTINGS}
         component={SettingsStack}
         {...props} // allow parent properties to be overridden
         options={{
@@ -203,7 +203,7 @@ function DashboardNavigator(props) {
       //      screenOptions={{ gestureEnabled: false }}
     >
       <RootStack.Screen
-        name="Dashboard"
+        name={Routes.DASHBOARD}
         component={DashboardTabNavigator}
         {...props} // allow parent properties to be overridden
         options={({ navigation, route }) => ({
@@ -220,7 +220,7 @@ function DashboardNavigator(props) {
       />
       {/* Put all the modal screens here */}
       <RootStack.Screen
-        name="ModalTemplate"
+        name={Routes.MODALTEMPLATE}
         component={TemplateModal}
         {...props} // allow parent properties to be overridden
         options={{ headerShown: false }}

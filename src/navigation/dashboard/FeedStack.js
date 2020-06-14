@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { Routes } from "../../constants";
 import { Detail, Feed } from "../../screens/dashboard";
 
 const Stack = createStackNavigator();
@@ -15,8 +16,8 @@ function FeedStack(props) {
       // initialRouteName="Feed"
       // screenOptions={{ gestureEnabled: false }}
     >
-      <Stack.Screen name="Feed" component={Feed} {...props} />
-      <Stack.Screen name="Detail" component={Detail} {...props} />
+      <Stack.Screen name={Routes.FEED} component={Feed} {...props} />
+      <Stack.Screen name={Routes.DETAIL} component={Detail} {...props} />
     </Stack.Navigator>
   );
 }

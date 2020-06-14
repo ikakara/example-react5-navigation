@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 
 /**
 - DrawerNavigator
@@ -21,9 +20,10 @@ import { View, Text } from "react-native";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { Signup, Welcome } from "../../screens/welcome";
-
+import { Routes } from "../../constants";
 import { ExampleHeader } from "../../components";
+
+import { Signup, Welcome } from "../../screens/welcome";
 
 const WelcomeStack = createStackNavigator();
 
@@ -34,7 +34,7 @@ function WelcomeNavigator(props) {
     <WelcomeStack.Navigator
       {...props} // allow parent properties to be overridden
       mode="modal"
-      initialRouteName="Welcome"
+      initialRouteName={Routes.WELCOME}
       screenOptions={({ navigation, route }) => ({
         headerRight: (props) => (
           <ExampleHeader
@@ -50,9 +50,13 @@ function WelcomeNavigator(props) {
         gestureEnabled: false,
       })}
     >
-      <WelcomeStack.Screen name="Welcome" component={Welcome} {...props} />
       <WelcomeStack.Screen
-        name="Signup"
+        name={Routes.WELCOME}
+        component={Welcome}
+        {...props}
+      />
+      <WelcomeStack.Screen
+        name={Routes.SIGNUP}
         component={Signup}
         {...props} // allow parent properties to be overridden
         options={({ navigation, route }) => ({

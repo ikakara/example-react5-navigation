@@ -77,6 +77,7 @@ The code is organized as follows:
     - [./Colors.js](/src/constants/Colors.js)
     - ./index.js
     - [./Layout.js](/src/constants/Layout.js)
+    - [./Routes.js](/src/constants/Routes.js)
   - /helpers
     - ./index.js
     - [./NavigationUtils.js](/src/helpers/NavigationUtils.js)
@@ -113,34 +114,34 @@ Here's how the headerTitle and headerRight are configured:
 
 ```javascript
 //const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
-let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
-routeName = routeName != "Drawer" ? routeName : "Feed";
-navigation.setOptions({
-  headerTitle: routeName,
-  headerRight: () => getRightHeader({ navigation, routeName }),
-  headerRightContainerStyle: {
-    paddingRight: 16,
-  },
-});
+  let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
+  routeName = routeName != Routes.DASHBOARD ? routeName : Routes.FEED;
+  navigation.setOptions({
+    headerTitle: routeName,
+    headerRight: () => getRightHeader({ navigation, routeName }),
+    headerRightContainerStyle: {
+      paddingRight: 16,
+    },
+  });
 ```
 
 ```javascript
 function getRightHeader({ navigation, routeName }) {
   switch (routeName) {
-    case "Drawer": // default routeName when called from the WelcomeStack
-    case "Feed":
-    case "Detail":
-    case "Profile":
+    case Routes.DASHBOARD: // default routeName when called from the WelcomeStack
+    case Routes.FEED:
+    case Routes.DETAIL:
+    case Routes.PROFILE:
       return (
         <View style={{ flexDirection: "row" }}>
           <Button
-            onPress={() => navigation.navigate("ModalTemplate")}
+            onPress={() => navigation.navigate(Routes.MODALTEMPLATE)}
             title="Do Modal"
             color="#00cc00"
           />
         </View>
       );
-    case "Settings":
+    case Routes.SETTINGS:
       return (
         <ExampleHeader
           focused={false}
@@ -214,6 +215,7 @@ The code mostly speaks for itself - it attempts to be NAIVE++, but if you have a
 
 ## TBDs
 
+- I18N/L10N - If you can get iOS, Android and Web for free, why not translations?
 - LinkingConfiguration (expo-links) - nice to have for the web version
 
 ## Further Learning

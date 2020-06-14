@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { Routes } from "../../constants";
 import { Profile } from "../../screens/dashboard";
 
 const Stack = createStackNavigator();
@@ -15,7 +16,7 @@ function ProfileStack(props) {
       //  initialRouteName="Profile"
       //  screenOptions={{ gestureEnabled: false }}
     >
-      <Stack.Screen name="Profile" component={Profile} {...props} />
+      <Stack.Screen name={Routes.PROFILE} component={Profile} {...props} />
     </Stack.Navigator>
   );
 }
