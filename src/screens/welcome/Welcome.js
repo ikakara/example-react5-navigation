@@ -14,7 +14,7 @@ function Welcome(props) {
       <Button
         title="Login"
         onPress={() =>
-          navigation.navigate(Routes.DASHBOARD, { screen: { Feed } })
+          navigation.navigate(Routes.DRAWERDASHBOARD, { screen: { Feed } })
         }
       />
       <Button
