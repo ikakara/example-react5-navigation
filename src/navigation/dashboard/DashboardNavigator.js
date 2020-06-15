@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Button, Platform } from "react-native";
+import { View, Button, Text, Platform } from "react-native";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 
 /**
