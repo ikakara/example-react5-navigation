@@ -1,0 +1,51 @@
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import * as React from "react";
+import { View, Text, Platform } from "react-native";
+
+import Colors from "../constants/Colors";
+
+function LeftHeaderBack(props) {
+  const navigation = useNavigation();
+
+  console.info(JSON.stringify(navigation));
+  if (Platform.OS !== "ios") {
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Ionicons
+          style={{ marginLeft: 0 }}
+          onPress={() => navigation.pop()}
+          name="ios-arrow-back"
+          size={24}
+          color={Colors.tabIconSelected}
+        />
+        <Text
+          style={{ fontSize: 18, color: Colors.tabIconSelected }}
+          onPress={() => navigation.pop()}
+        >
+          {props.title}
+        </Text>
+      </View>
+    );
+  } else {
+    return (
+      <View style={{ flexDirection: "row" }}>
+        <Ionicons
+          style={{ marginLeft: 16 }}
+          onPress={() => navigation.pop()}
+          name="md-arrow-back"
+          size={24}
+        />
+      </View>
+    );
+  }
+}
+
+export default LeftHeaderBack;

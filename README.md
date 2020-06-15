@@ -86,6 +86,7 @@ The code is organized as follows:
   - /components
     - [./ExampleHeader.js](/src/components/ExampleHeader.js)
     - ./index.js
+    - [./LeftHeaderBack.js](/src/components/LeftHeaderBack.js)
     - [./TabBarIcon.js](/src/components/TabBarIcon.js)
   - /constants
     - [./Colors.js](/src/constants/Colors.js)
@@ -141,14 +142,7 @@ if (current?.type == "stack" && previous?.type == "stack") {
   // we need to reconfigure the headerLeft w/ a back arrow
   navigation.setOptions({
     headerLeft: (props) => (
-      <View style={{ flexDirection: "row" }}>
-        <Ionicons
-          style={{ marginLeft: 16 }}
-          onPress={() => navigation.pop()}
-          name="md-arrow-back"
-          size={24}
-        />
-      </View>
+      <LeftHeaderBack title={previous?.name} {...navigation} />
     ),
   });
 } else {
@@ -157,7 +151,7 @@ if (current?.type == "stack" && previous?.type == "stack") {
       <Ionicons
         style={{ paddingLeft: 10 }}
         onPress={() => navigation.openDrawer()}
-        name="md-menu"
+        name={Platform.OS === "ios" ? "ios-menu" : "md-menu"}
         size={30}
       />
     ),

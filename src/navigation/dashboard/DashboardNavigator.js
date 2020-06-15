@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Button, Text, Platform } from "react-native";
-import { Entypo, Ionicons } from "@expo/vector-icons";
+import { View, Button, Platform } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 /**
 - DrawerNavigator
@@ -27,7 +27,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Routes } from "../../constants";
 import { RootNavigation } from "../../navigation";
 import { NavigationUtils } from "../../helpers";
-import { TabBarIcon, ExampleHeader } from "../../components";
+import { TabBarIcon, ExampleHeader, LeftHeaderBack } from "../../components";
 
 import { FeedStack, ProfileStack, SettingsStack } from "../dashboard";
 import { TemplateModal } from "../../screens/dashboard";
@@ -129,41 +129,18 @@ function DashboardTabNavigator(props) {
 
   if (current?.type == "stack" && previous?.type == "stack") {
     // we need to reconfigure the headerLeft w/ a back arrow
-    if (Platform.OS === "ios") {
-      navigation.setOptions({
-        headerLeft: (props) => (
-          <View style={{ flexDirection: "row" }}>
-            <Entypo
-              style={{ marginLeft: 16 }}
-              onPress={() => navigation.pop()}
-              name="chevron-left"
-              size={24}
-            />
-            <Text>{previous.name}</Text>
-          </View>
-        ),
-      });
-    } else {
-      navigation.setOptions({
-        headerLeft: (props) => (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons
-              style={{ marginLeft: 16 }}
-              onPress={() => navigation.pop()}
-              name="md-arrow-back"
-              size={24}
-            />
-          </View>
-        ),
-      });
-    }
+    navigation.setOptions({
+      headerLeft: (props) => (
+        <LeftHeaderBack title={previous?.name} {...navigation} />
+      ),
+    });
   } else {
     navigation.setOptions({
       headerLeft: (props) => (
         <Ionicons
           style={{ paddingLeft: 10 }}
           onPress={() => navigation.openDrawer()}
-          name="md-menu"
+          name={Platform.OS === "ios" ? "ios-menu" : "md-menu"}
           size={30}
         />
       ),
