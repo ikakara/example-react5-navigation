@@ -143,16 +143,10 @@ if (current?.type == "stack" && previous?.type == "stack") {
     headerLeft: (props) => (
       <View style={{ flexDirection: "row" }}>
         <Ionicons
-          style={{ paddingLeft: 10 }}
-          onPress={() => navigation.openDrawer()}
-          name="md-menu"
-          size={30}
-        />
-        <Ionicons
-          style={{ paddingLeft: 10 }}
+          style={{ marginLeft: 16 }}
           onPress={() => navigation.pop()}
-          name="md-arrow-dropleft"
-          size={30}
+          name="md-arrow-back"
+          size={24}
         />
       </View>
     ),
