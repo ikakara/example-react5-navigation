@@ -125,59 +125,7 @@ Most of the app is trivial. The main complexity is configuring the header (heade
 
 The majority of the code is in [./DashboardNavigator.js](/src/navigation/dashboard/DashboardNavigator.js) (contains 2 functions): the dashboard's StackNavigator and TabNavigator. I kept them together, since one contains the StackNavigators/screens for each tab, and the other contains the modal screens. If you were to build a screen that required a modal screen, it made sense to keep the "wiring" in one file. Modal screens need to be in the RootStack (e.g. DashboardStack), so they cover the entire screen when used.
 
-Here's how the headerTitle and headerRight are configured:
-
-```javascript
-//const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
-let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
-navigation.setOptions({
-  headerTitle: getTitle({ routeName }),
-  headerRight: () => getRightHeader({ navigation, routeName }),
-  headerRightContainerStyle: {
-    paddingRight: 16,
-  },
-});
-```
-
-```javascript
-function getRightHeader({ navigation, routeName }) {
-  switch (routeName) {
-    case Routes.DASHBOARD: // default routeName when called from the WelcomeStack
-    case Routes.FEED:
-    case Routes.DETAIL:
-    case Routes.PROFILE:
-      return (
-        <View style={{ flexDirection: "row" }}>
-          <Button
-            onPress={() => navigation.navigate(Routes.MODALTEMPLATE)}
-            title="Do Modal"
-            color="#00cc00"
-          />
-        </View>
-      );
-    case Routes.SETTINGS:
-      return (
-        <ExampleHeader
-          focused={false}
-          title="Customize Me!"
-          name="md-thumbs-up"
-          alert="pressed me"
-        />
-      );
-    default:
-      return (
-        <ExampleHeader
-          focused={false}
-          title={`Missing "case ${routeName}:"`}
-          name="md-thumbs-down"
-          alert={routeName}
-        />
-      );
-  }
-}
-```
-
-The headerLeft was much more complicated:
+The headerLeft is configured as follows:
 
 ```javascript
 // One way to understand the navigation state, is to get the navigation stack
@@ -223,9 +171,83 @@ if (current?.type == "stack" && previous?.type == "stack") {
 }
 ```
 
+Here's how the headerTitle and headerRight are configured:
+
+```javascript
+const routeName = current?.name;
+navigation.setOptions({
+  headerTitle: getTitle({ routeName }),
+  headerRight: () => getRightHeader({ navigation, routeName }),
+  headerRightContainerStyle: {
+    paddingRight: 16,
+  },
+});
+```
+
+```javascript
+// We could use a giant switch, but I guess I wanted to show off ES6
+function getTitle({ routeName }) {
+  if (
+    routeName == undefined ||
+    [Routes.DRAWERDASHBOARD, Routes.DASHBOARD, Routes.TABFEED].includes(
+      routeName
+    )
+  ) {
+    return Routes.FEED;
+  }
+
+  if (routeName == Routes.TABPROFILE) {
+    return Routes.PROFILE;
+  }
+  if (routeName == Routes.TABSETTINGS) {
+    return Routes.SETTINGS;
+  }
+
+  return routeName;
+}
+```
+
+```javascript
+function getRightHeader({ navigation, routeName }) {
+  switch (routeName) {
+    case Routes.DASHBOARD: // default routeName when called from the WelcomeStack
+    case Routes.FEED:
+    case Routes.DETAIL:
+    case Routes.PROFILE:
+      return (
+        <View style={{ flexDirection: "row" }}>
+          <Button
+            onPress={() => navigation.navigate(Routes.MODALTEMPLATE)}
+            title="Do Modal"
+            color="#00cc00"
+          />
+        </View>
+      );
+    case Routes.SETTINGS:
+      return (
+        <ExampleHeader
+          focused={false}
+          title="Customize Me!"
+          name="md-thumbs-up"
+          alert="pressed me"
+        />
+      );
+    default:
+      return (
+        <ExampleHeader
+          focused={false}
+          title={`Missing "case ${routeName}:"`}
+          name="md-thumbs-down"
+          alert={routeName}
+        />
+      );
+  }
+}
+```
+
 ## NotFound NotWorking on snack.expo.io
 
-NotFound page is a fundamental screen for web.  For some reason, snack doesn't like it (as coded), so I've disabled it
+NotFound page is a fundamental screen for web. For some reason, snack doesn't like it (as coded), so I've disabled it
 
 It does work locally (for me) = so use at your descretion.
 

@@ -133,16 +133,10 @@ function DashboardTabNavigator(props) {
       headerLeft: (props) => (
         <View style={{ flexDirection: "row" }}>
           <Ionicons
-            style={{ paddingLeft: 10 }}
-            onPress={() => navigation.openDrawer()}
-            name="md-menu"
-            size={30}
-          />
-          <Ionicons
-            style={{ paddingLeft: 10 }}
+            style={{ marginLeft: 16 }}
             onPress={() => navigation.pop()}
-            name="md-arrow-dropleft"
-            size={30}
+            name="md-arrow-back"
+            size={24}
           />
         </View>
       ),
@@ -168,7 +162,8 @@ function DashboardTabNavigator(props) {
   // currently active tab. Learn more in the documentation:
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
   //const tabName = route.state?.routes[route.state.index]?.name ?? "Feed"; // requires an initial name
-  let routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
+  //const routeName = RootNavigation.getCurrentRoute()?.name; // a short cut to the above
+  const routeName = current?.name;
   navigation.setOptions({
     headerTitle: getTitle({ routeName }),
     headerRight: () => getRightHeader({ navigation, routeName }),
