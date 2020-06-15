@@ -8,7 +8,6 @@ import Colors from "../constants/Colors";
 function LeftHeaderBack(props) {
   const navigation = useNavigation();
 
-  console.info(JSON.stringify(navigation));
   if (Platform.OS === "ios") {
     return (
       <View
@@ -20,14 +19,18 @@ function LeftHeaderBack(props) {
         }}
       >
         <Ionicons
-          style={{ marginLeft: 0 }}
+          style={{ marginLeft: 10 }}
           onPress={() => navigation.pop()}
           name="ios-arrow-back"
-          size={24}
+          size={30}
           color={Colors.tabIconSelected}
         />
         <Text
-          style={{ fontSize: 18, color: Colors.tabIconSelected }}
+          style={{
+            marginLeft: 10,
+            fontSize: 18,
+            color: Colors.tabIconSelected,
+          }}
           onPress={() => navigation.pop()}
         >
           {props.title}
