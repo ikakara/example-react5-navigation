@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Button } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View, Button, Platform } from "react-native";
+import { Entypo, Ionicons } from "@expo/vector-icons";
 
 /**
 - DrawerNavigator
@@ -129,18 +129,34 @@ function DashboardTabNavigator(props) {
 
   if (current?.type == "stack" && previous?.type == "stack") {
     // we need to reconfigure the headerLeft w/ a back arrow
-    navigation.setOptions({
-      headerLeft: (props) => (
-        <View style={{ flexDirection: "row" }}>
-          <Ionicons
-            style={{ marginLeft: 16 }}
-            onPress={() => navigation.pop()}
-            name="md-arrow-back"
-            size={24}
-          />
-        </View>
-      ),
-    });
+    if (Platform.OS === "ios") {
+      navigation.setOptions({
+        headerLeft: (props) => (
+          <View style={{ flexDirection: "row" }}>
+            <Entypo
+              style={{ marginLeft: 16 }}
+              onPress={() => navigation.pop()}
+              name="chevron-left"
+              size={24}
+            />
+            <Text>{previous.name}</Text>
+          </View>
+        ),
+      });
+    } else {
+      navigation.setOptions({
+        headerLeft: (props) => (
+          <View style={{ flexDirection: "row" }}>
+            <Ionicons
+              style={{ marginLeft: 16 }}
+              onPress={() => navigation.pop()}
+              name="md-arrow-back"
+              size={24}
+            />
+          </View>
+        ),
+      });
+    }
   } else {
     navigation.setOptions({
       headerLeft: (props) => (
