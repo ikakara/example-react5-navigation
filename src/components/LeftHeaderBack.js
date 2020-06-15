@@ -9,7 +9,7 @@ function LeftHeaderBack(props) {
   const navigation = useNavigation();
 
   console.info(JSON.stringify(navigation));
-  if (Platform.OS !== "ios") {
+  if (Platform.OS === "ios") {
     return (
       <View
         style={{
