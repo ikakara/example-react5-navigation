@@ -15,6 +15,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     justifyContent: "center",
   },
+  ioniconsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: 120,
+  },
 });
 
 export default styles;

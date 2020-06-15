@@ -31,6 +31,7 @@ import { TabBarIcon, ExampleHeader, LeftHeaderBack } from "../../components";
 
 import { FeedStack, ProfileStack, SettingsStack } from "../dashboard";
 import { TemplateModal } from "../../screens/dashboard";
+import { styles } from "../../screens";
 
 // We could use a giant switch, but I guess I wanted to show off ES6
 function getTitle({ routeName }) {
@@ -59,10 +60,25 @@ function getRightHeader({ navigation, routeName }) {
     case Routes.DRAWERDASHBOARD:
     case Routes.DASHBOARD:
     case Routes.TABFEED:
-    case Routes.TABPROFILE:
-    case Routes.TABSETTINGS:
     case Routes.FEED:
+      return (
+        <View style={styles.ioniconsContainer}>
+          <Ionicons
+            size={20}
+            name={Platform.OS === "ios" ? "ios-search" : "md-search"}
+          />
+          <Ionicons
+            size={20}
+            name={Platform.OS === "ios" ? "ios-heart" : "md-heart"}
+          />
+          <Ionicons
+            size={20}
+            name={Platform.OS === "ios" ? "ios-more" : "md-more"}
+          />
+        </View>
+      );
     case Routes.DETAIL:
+    case Routes.TABPROFILE:
     case Routes.PROFILE:
       return (
         <View style={{ flexDirection: "row" }}>
@@ -73,6 +89,7 @@ function getRightHeader({ navigation, routeName }) {
           />
         </View>
       );
+    case Routes.TABSETTINGS:
     case Routes.SETTINGS:
       return (
         <ExampleHeader
