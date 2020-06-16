@@ -64,15 +64,15 @@ function getRightHeader({ navigation, routeName }) {
       return (
         <View style={styles.ioniconsContainer}>
           <Ionicons
-            size={20}
+            size={18}
             name={Platform.OS === "ios" ? "ios-search" : "md-search"}
           />
           <Ionicons
-            size={20}
+            size={18}
             name={Platform.OS === "ios" ? "ios-heart" : "md-heart"}
           />
           <Ionicons
-            size={20}
+            size={18}
             name={Platform.OS === "ios" ? "ios-more" : "md-more"}
           />
         </View>

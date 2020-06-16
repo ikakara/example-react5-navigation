@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   ioniconsContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    width: 120,
+    width: 90,
   },
 });
 

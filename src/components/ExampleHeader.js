@@ -14,11 +14,11 @@ function ExampleHeader(props) {
         justifyContent: "center",
       }}
     >
-      <Text style={{ marginRight: 16, fontSize: 18 }}>{props.title}</Text>
+      <Text style={{ marginRight: 16, fontSize: 16 }}>{props.title}</Text>
       <Ionicons
         name={props.name}
-        size={30}
-        style={{ marginBottom: -3 }}
+        size={24}
+        style={{ marginBottom: 0 }}
         color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
         onPress={() => alert(props.alert ?? "props.alert undefined")}
       />
