@@ -39,6 +39,10 @@ function DrawerNavigator(props) {
         {...props} // allow parent properties to be overridden
         //drawerType={Layout.isSmallDevice ? "front" : "permanent"}
         drawerPosition="left"
+        drawerStyle={{
+          //backgroundColor: "#c6cbef",
+          width: 180,
+        }}
         initialRouteName={Routes.DRAWERWELCOME}
       >
         <Drawer.Screen
