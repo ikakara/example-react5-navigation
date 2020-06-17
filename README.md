@@ -198,9 +198,29 @@ function getTitle({ routeName }) {
 ```javascript
 function getRightHeader({ navigation, routeName }) {
   switch (routeName) {
-    case Routes.DASHBOARD: // default routeName when called from the WelcomeStack
+    case undefined: // can get this from the Router
+    case Routes.DRAWERDASHBOARD:
+    case Routes.DASHBOARD:
+    case Routes.TABFEED:
     case Routes.FEED:
+      return (
+        <View style={styles.ioniconsContainer}>
+          <Ionicons
+            size={18}
+            name={Platform.OS === "ios" ? "ios-search" : "md-search"}
+          />
+          <Ionicons
+            size={18}
+            name={Platform.OS === "ios" ? "ios-heart" : "md-heart"}
+          />
+          <Ionicons
+            size={18}
+            name={Platform.OS === "ios" ? "ios-more" : "md-more"}
+          />
+        </View>
+      );
     case Routes.DETAIL:
+    case Routes.TABPROFILE:
     case Routes.PROFILE:
       return (
         <View style={{ flexDirection: "row" }}>
@@ -211,6 +231,7 @@ function getRightHeader({ navigation, routeName }) {
           />
         </View>
       );
+    case Routes.TABSETTINGS:
     case Routes.SETTINGS:
       return (
         <ExampleHeader
@@ -221,6 +242,7 @@ function getRightHeader({ navigation, routeName }) {
         />
       );
     default:
+      // case misdefined (e.g. spelling issue)
       return (
         <ExampleHeader
           focused={false}
