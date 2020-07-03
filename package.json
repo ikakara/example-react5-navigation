@@ -7,6 +7,12 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
+  "comments": {
+    "dependencies": [
+      "expo already includes react-native-gesture-handler - DON'T INCLUDE BELOW",
+      "react-native-gesture-handler: ~1.6.1"
+    ]
+  },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.6.1",
@@ -20,7 +26,6 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.1.tar.gz",
-    "react-native-gesture-handler": "~1.6.1",
     "react-native-reanimated": "~1.9.0",
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
