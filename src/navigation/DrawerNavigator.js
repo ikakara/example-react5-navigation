@@ -62,7 +62,7 @@ function DrawerNavigator(props) {
           }}
         />
         {/* this doesn't work on snack (web), but it runs fine locally */}
-        {Platform.OS === "web" && (
+        {false && Platform.OS === "web" && (
           <Drawer.Screen
             name={Routes.DRAWERNOTFOUND}
             component={NotFound}
