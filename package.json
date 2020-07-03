@@ -10,12 +10,13 @@
   "comments": {
     "dependencies": [
       "expo already include the following - DON'T INCLUDE BELOW",
-      "react-native-gesture-handler: ~1.6.1",
-      "react-native-safe-area-context: ~3.0.7"
+      "react-native-gesture-handler: ~1.6.1"
     ]
   },
   "resolutions": {
+    "react-native-safe-area-context": "~3.0.7",
     "babel-plugin-react-native-web": "~0.13.1",
+    "react-native-screens": "~2.9.0",
     "react-native-web": "~0.13.1"
   },
   "dependencies": {
@@ -36,8 +37,8 @@
     "react-native-web": "~0.13.1"
   },
   "devDependencies": {
-    "babel-preset-expo": "^8.2.3",
-    "@babel/core": "^7.10.4"
+    "@babel/core": "^7.10.4",
+    "babel-preset-expo": "^8.2.3"
   },
   "private": true
 }
