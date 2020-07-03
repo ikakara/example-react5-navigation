@@ -1,8 +1,7 @@
 import * as Linking from "expo-linking";
 
-export default {
-  prefixes: [Linking.makeUrl("/")],
-  config: {
+const config = {
+  screens: {
     // Routes.DRAWERDASHBOARD
     DrawerDashboard: {
       // pruning length of path
@@ -50,4 +49,10 @@ export default {
     // Routes.DRAWERNOTFOUND
     NotFound: "*",
   },
+};
+
+export default {
+  prefixes: [Linking.makeUrl("/")],
+
+  config,
 };
