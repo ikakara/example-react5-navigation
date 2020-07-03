@@ -76,6 +76,7 @@ function DrawerNavigator(props) {
     );
   } catch (err) {
     console.error("err:", err);
+    return null;
   }
 }
 
