@@ -11,7 +11,7 @@
     "logkitty": "^0.7.1",
     "mem": "^6.1.0",
     "expo-linking": "^1.0.3",
-    "react-native-safe-area-context": "1.0.2"
+    "react-native-safe-area-context": "3.0.7"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
