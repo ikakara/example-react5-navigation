@@ -287,6 +287,7 @@ The code mostly speaks for itself - it attempts to be NAIVE++, but if you have a
 ## Known issues
 
 - aws-amplify-react-native@4.2.1 (latest) depends on react-native-elements@0.19.1 which breaks using react-native-web @0.12.x or greater. [See workaround.](https://github.com/ikakara/expo-amplify-bug)
+- SDK38 depends on react-native-safe-area-context@3.0.7 which has an [iOS bug](https://github.com/ikakara/expo-sdk38-bug)
 
 ## Further Learning
 
